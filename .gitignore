@@ -1,0 +1,59 @@
+# Gradle
+.gradle/
+**/gradle-*/
+**/gradle-*/**/*-bin.zip
+**/gradle-wrapper.jar
+gradle-wrapper.jar
+
+# Gradle wrapper and caches in subprojects
+**/.gradle/
+**/build/
+**/out/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Node / frontend
+node_modules/
+dist/
+build/
+
+# Tailwind / cache
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Java
+*.class
+*.jar
+*.war
+
+# Others large binaries
+**/*.zip
+**/*.tar
+**/*.tar.gz
+**/*.tgz
+**/*.exe
+**/*.dll
+
+# Optional: exclude local secrets
+secrets/
+
+# Exclude the gradle wrapper directory if present under backend
+backend/.gradle-wrapper/
+backend/.gradle/
+backend/build/
+
+# Allow local overrides
+!/.env.example
