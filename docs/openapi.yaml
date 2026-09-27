@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: TrainingApp API
+  version: '1.0.0'
+  description: API spec for minimal TrainingApp backend used by frontend mocks
+
+servers:
+  - url: /api
+
+paths:
+  /records:
+    get:
+      summary: List records
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Record'
+    post:
+      summary: Create record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+
+  /records/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get record
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+        '404':
+          description: Not found
+    put:
+      summary: Update record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecordCreate'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record'
+    delete:
+      summary: Delete record
+      responses:
+        '204':
+          description: Deleted
+
+  /exercises:
+    get:
+      summary: Search exercises
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Exercise'
+
+components:
+  schemas:
+    Record:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date
+        exerciseId:
+          type: string
+        sets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Set'
+      required: [id, date]
+
+    RecordCreate:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        exerciseId:
+          type: string
+        sets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Set'
+      required: [date, exerciseId]
+
+    Set:
+      type: object
+      properties:
+        reps:
+          type: integer
+        weight:
+          type: number
+
+    Exercise:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required: [id, name]

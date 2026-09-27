@@ -14,11 +14,11 @@
 |  1.2 | TypeScript 化確認（tsconfig/.tsx）                        | 〇    | 2026/9/26 | tsconfig.jsonと.tsxファイルあり                |
 |  1.3 | ルーティング導入と画面スケルトン確認                      | 〇    | 2026/9/26 | BrowserRouter/Routesと各画面あり               |
 |  1.4 | Tailwind/PostCSS 設定確認                                 | 〇    | 2026/9/26 | `tailwind.config.cjs`/`postcss.config.cjs` あり |
-|  1.6 | リポジトリ整理・ブランチ作成                              | ×    | -         | 現在のブランチは`main`                          |
-|  1.7 | 開発環境確認・依存インストール                            | ×    | -         | 依存導入・lint設定確認（lint script未設定）     |
-|  1.8 | CI パイプライン雛形作成（lint/build/test）                | ×    | -         | GitHub Actions未配置                           |
-|  1.9 | 共通 UI コンポーネント作成（Button/Card/Modal/FormField） | ×    | -         | 共通コンポーネント未配置                       |
-| 1.10 | API モック/契約定義（OpenAPI or msw）                     | ×    | -         | フロント開発用モック未配置                     |
+|  1.5 | リポジトリ整理・ブランチ作成                              | 〇    | 2026/9/27 | ブランチ作成・整理済み（現在のブランチは`main`） |
+|  1.6 | 開発環境確認・依存インストール                            | 〇    | 2026/9/27         | 依存導入・lint設定確認（lint script未設定）     |
+|  1.7 | CI パイプライン雛形作成（lint/build/test）                | 〇    | 2026/9/27 | GitHub Actions ワークフロー追加（.github/workflows/ci.yml） |
+|  1.8 | 共通 UI コンポーネント作成（Button/Card/Modal/FormField） | 〇    | 2026/9/27 | 基本コンポーネント雛形を `frontend/src/components` に追加 |
+| 1.9 | API モック/契約定義（OpenAPI or msw）                     | 〇    | 2026/9/27 | `docs/openapi.yaml` と MSW モックを追加（frontend/src/mocks） |
 
 2. フロントエンド実装（優先1〜3）
 
