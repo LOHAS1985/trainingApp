@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 type LinkItem = { key: string; label: string; to: string };
@@ -12,6 +12,22 @@ const links: LinkItem[] = [
 ];
 
 export default function Home(): JSX.Element {
+  const [today] = useState(() => new Date().toISOString().slice(0, 10))
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (!menuRef.current) return
+      if (!(e.target instanceof Node)) return
+      if (!menuRef.current.contains(e.target)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('click', onDocClick)
+    return () => document.removeEventListener('click', onDocClick)
+  }, [])
+
   return (
     <div className="container mx-auto px-4 py-10">
       <header className="flex items-center justify-between mb-8">
@@ -22,10 +38,24 @@ export default function Home(): JSX.Element {
           <p className="text-gray-300">今日の調子を記録しよう</p>
         </div>
         <div className="flex items-center gap-4">
-          <div className="text-sm text-gray-300">2026-09-26</div>
-          <button className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md">
-            アカウント
-          </button>
+          <div className="text-sm text-gray-300">{today}</div>
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setMenuOpen((s) => !s)}
+              aria-haspopup="true"
+              aria-expanded={menuOpen}
+              className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md"
+            >
+              アカウント
+            </button>
+            {menuOpen && (
+              <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg text-gray-900 z-50">
+                <button className="w-full text-left px-3 py-2 hover:bg-gray-100">プロフィール</button>
+                <button className="w-full text-left px-3 py-2 hover:bg-gray-100">設定</button>
+                <button className="w-full text-left px-3 py-2 hover:bg-gray-100">ログアウト</button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
