@@ -128,10 +128,19 @@ components:
     Set:
       type: object
       properties:
+        type:
+          type: string
+          description: "'reps' or 'time'"
+          enum: ['reps','time']
         reps:
           type: integer
+          description: 回数（`type`が `reps` のとき使用）
+        timeSeconds:
+          type: integer
+          description: 秒数（`type`が `time` のとき使用）
         weight:
           type: number
+          description: 任意の負荷（kg）
 
     Exercise:
       type: object

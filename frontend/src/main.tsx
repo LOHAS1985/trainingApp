@@ -3,15 +3,17 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./styles/tailwind.css";
 
-if (import.meta.env.DEV) {
-  // MSW を開発時に起動
-  import('./mocks/browser').then(({ worker }) => {
-    worker.start()
-  })
+function renderApp() {
+  createRoot(document.getElementById("root") as HTMLElement).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+  );
 }
 
-createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+if (import.meta.env.DEV) {
+  // MSW を開発時に起動し、起動完了後にアプリをレンダリングする
+  import('./mocks/browser').then(({ worker }) => worker.start().then(() => renderApp()));
+} else {
+  renderApp();
+}
